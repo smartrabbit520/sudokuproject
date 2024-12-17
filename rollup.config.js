@@ -1,11 +1,11 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import { writeFileSync } from 'fs';
+import {writeFileSync} from 'fs';
 import copy from 'rollup-plugin-copy';
 import css from 'rollup-plugin-css-only';
 import livereload from 'rollup-plugin-livereload';
 import svelte from 'rollup-plugin-svelte';
-import { terser } from 'rollup-plugin-terser';
+import {terser} from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 
 const mode = process.env.NODE_ENV;
@@ -17,7 +17,7 @@ const preprocess = sveltePreprocess({
 			require('postcss-import'),
 			require('tailwindcss'),
 			require('autoprefixer'),
-			...(production ? [require('postcss-clean')] : []),
+			//...(production ? [require('postcss-clean')] : []),
 		],
 	},
 	defaults: {
