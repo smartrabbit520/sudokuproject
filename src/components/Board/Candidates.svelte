@@ -4,6 +4,7 @@
 	import { userGrid } from '@sudoku/stores/grid';
 	import { notes } from '@sudoku/stores/notes';
 	import { candidates } from '@sudoku/stores/candidates';
+	import {num} from '@sudoku/stores/currentValueStore';
 	
 	export let candidates1 = [];
 	export let cellX;
@@ -40,6 +41,7 @@
 		}
 		}
 		userGrid.applyHint($cursor);
+		num.set(1);
 		
 	  }
 	  
