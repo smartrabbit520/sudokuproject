@@ -5,6 +5,7 @@
 	import { settings } from '@sudoku/stores/settings';
 	import { cursor } from '@sudoku/stores/cursor';
 	import { candidates } from '@sudoku/stores/candidates';
+	import { currentValueStore } from '@sudoku/stores/currentValueStore';
 	import Cell from './Cell.svelte';
 
 	function isSelected(cursorStore, x, y) {
@@ -27,8 +28,11 @@
 
 		return gridStore[cursorStore.y][cursorStore.x];
 	}
+
+	
 </script>
 
+<div class="all">
 <div class="board-padding relative z-10">
 	<div class="max-w-xl relative">
 		<div class="w-full" style="padding-top: 100%"></div>
@@ -42,7 +46,8 @@
 					<Cell {value}
 					      cellY={y + 1}
 					      cellX={x + 1}
-					      candidates={$candidates[x + ',' + y]}
+					      candidates1={$candidates[x + ',' + y]}
+						  hintsLevel={$settings.hintsLevel}
 					      disabled={$gamePaused}
 					      selected={isSelected($cursor, x, y)}
 					      userNumber={$grid[y][x] === 0}
@@ -55,10 +60,27 @@
 		</div>
 
 	</div>
+	
 </div>
-
+<div class="container">
+  <!-- 显示收到的值，放到右边 -->
+  <p class="right-side">{$currentValueStore}</p>
+</div>
+</div>
 <style>
 	.board-padding {
 		@apply px-4 pb-4;
 	}
+  .container {
+    display: flex;          /* 使用 flex 布局 */
+    justify-content: flex-end;  /* 将内容对齐到右侧 */
+    width: 100%;            /* 让容器占满可用空间 */
+    padding: 10px;          /* 添加适当的内边距 */
+    box-sizing: border-box; /* 确保边框和内边距不影响容器尺寸 */
+  }
+  
+  .right-side {
+    white-space: nowrap;    /* 防止文本换行 */
+    font-size: 16px;         /* 调整字体大小，视情况而定 */
+  }
 </style>
