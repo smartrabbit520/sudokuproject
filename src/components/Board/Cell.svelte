@@ -158,8 +158,8 @@
     */
 
     userGrid.subscribe(($userGrid) => {
-      console.log("xhr_1")
-      console.log($num);
+      // console.log("xhr_1")
+      // console.log($num);
       if ($num === -1){
         return
       }
@@ -168,14 +168,14 @@
         candidates1 &&
         candidates1.length === 1
       ) {
-        console.log("双击事件触发");
-        console.log("111");
+        // console.log("双击事件触发");
+        // console.log("111");
         userGrid.set($cursor, candidates1[0]); // 更新 grid
         let pos = { x: $cursor.x, y: $cursor.y };
-        console.log($userGrid[$cursor.y][$cursor.x]);
+        // console.log($userGrid[$cursor.y][$cursor.x]);
         userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
-          console.log("xhr_2")
-          console.log($num);
+          // console.log("xhr_2")
+          // console.log($num);
           if ($num === -1){
             return
           }
@@ -184,7 +184,7 @@
             //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
           }
           if ($candidateonlySet.size===0 && $num > 0){
-            console.log("22222222222222222");
+            // console.log("22222222222222222");
             userGrid.applyHint($cursor);
           }
         });
