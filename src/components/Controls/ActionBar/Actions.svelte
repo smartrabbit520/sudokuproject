@@ -32,8 +32,7 @@
 		let num1=$num;
 		if(num1<$settings.hintsLevel){
 			userGrid.applyHint($cursor);
-			num.set(num1+1)
-			;
+			num.set(num1+1);
 		}
 		else if(num1===$settings.hintsLevel){
 			num.set(1);
@@ -111,7 +110,7 @@
 		<span class="badge badge-primary">{$num}</span>
 		{/if}
 	</button>
-
+	{#if 0!=0}
 	<button class="btn btn-round btn-badge" on:click={notes.toggle} title="Notes ({$notes ? 'ON' : 'OFF'})">
 		<svg class="icon-outline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -119,6 +118,7 @@
 
 		<span class="badge tracking-tighter" class:badge-primary={$notes}>{$notes ? 'ON' : 'OFF'}</span>
 	</button>
+	{/if}
 
 </div>
 
