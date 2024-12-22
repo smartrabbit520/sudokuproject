@@ -94,7 +94,7 @@
             $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
             //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
           }
-          if ($candidateonlySet.size===0){
+          if ($candidateonlySet.size===0 && $num > 0){
             console.log("22222222222222222");
             userGrid.applyHint($cursor);
           }

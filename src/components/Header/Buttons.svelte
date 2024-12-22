@@ -1,6 +1,6 @@
 <script>
 	import { modal } from '@sudoku/stores/modal';
-	import { pauseGame, resumeGame } from '@sudoku/game';
+	import { pauseGame, resumeGame,startGame } from '@sudoku/game';
 
 	function handleShareButton() {
 		pauseGame();
@@ -9,7 +9,7 @@
 
 	function handleSettingsButton() {
 		pauseGame();
-		modal.show('settings', { onHide: resumeGame });
+		modal.show('settings', { onHide: startGame });
 	}
 </script>
 

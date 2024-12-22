@@ -8,6 +8,7 @@
 	import { keyboardDisabled } from '@sudoku/stores/keyboard';
 	import { gamePaused } from '@sudoku/stores/game';
 	import {num} from '@sudoku/stores/currentValueStore';
+	import { modal } from '@sudoku/stores/modal';
 	
 	let lastClickTime = 0;
 	let timeoutId = null;
@@ -76,6 +77,14 @@
 			console.log('BackToBranch button clicked');
 			userGrid.backToBranch();
 		}
+	
+	function openSettings() {
+		modal.show('settings');
+	}
+	
+	function hideModal() {
+		modal.hide();
+	}
 </script>
 
 <div class="action-buttons space-x-3">
