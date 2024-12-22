@@ -21,6 +21,8 @@
   export let sameArea;
   export let sameNumber;
 
+  
+
   const borderRight = cellX !== SUDOKU_SIZE && cellX % 3 !== 0;
   const borderRightBold = cellX !== SUDOKU_SIZE && cellX % 3 === 0;
   const borderBottom = cellY !== SUDOKU_SIZE && cellY % 3 !== 0;
@@ -76,20 +78,107 @@
     });
   }
 
+
+
   function handleDoubleClick(event) {
     cursor.set(cellX - 1, cellY - 1);
     event.stopPropagation(); // 阻止事件冒泡，防止父级事件处理
+    
+    // if (
+    //   $userGrid[$cursor.y][$cursor.x] === 0 &&
+    //   candidates1 &&
+    //   candidates1.length === 1
+    // ) {
+    //   console.log("双击事件触发");
+    //   console.log("111");
+    //   userGrid.set($cursor, candidates1[0]); // 更新 grid
+    //   let pos = { x: $cursor.x, y: $cursor.y };
+    //   console.log($userGrid[$cursor.y][$cursor.x]);
+    //   // let a_xhr = userGrid.candidateonlySet;
+    //   // 已知 userGrid.candidateonlySet 是 writable(new Set())，根据注释内容，完成从candidateonlySet中删去当前cursor的y和x
+    //   // 考虑没有has
+
+    //   let candidateOnlySet;
+    //   console.log(userGrid)
+    //   console.log($userGrid.candidateOnlySet)
+    //   $userGrid.candidateOnlySet.subscribe(value => {
+    //     candidateOnlySet = value;
+    //   });
+
+    //   // const candidateOnlySet = userGrid.candidateonlySet;
+    //   if (candidateOnlySet instanceof Set) {
+    //       // 判断当前 cursor 对应的坐标元素是否存在于集合中，若存在则删除
+    //       const elementToRemove = `${$cursor.y},${$cursor.x}`;
+    //       if (candidateOnlySet.has(elementToRemove)) {
+    //           candidateOnlySet.delete(elementToRemove);
+    //       }
+    //       if (candidateOnlySet.size === 0) {
+    //           console.log("22222222222222222");
+    //           userGrid.applyHint($cursor);
+    //       }
+    //   } else {
+    //       // 如果不是 Set 类型，这里可以根据实际需求进行适当的错误处理或日志记录等操作
+    //       console.error("userGrid.candidateonlySet is not a Set type as expected!");
+    //   }
+
+
+
+
+
+
+      // userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
+      //   if ($candidateonlySet.has(`${$cursor.y},${$cursor.x}`)) {
+      //     $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
+      //     //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
+      //   }
+      //   if ($candidateonlySet.size===0){
+      //     console.log("22222222222222222");
+      //     userGrid.applyHint($cursor);
+      //   }
+      // });
+
+      //candidates.subscribe($candidates=> {
+      //console.log($cursor.x+','+$cursor.y,$candidates[$cursor.x+','+$cursor.y]);
+      // console.log($cursor.y+','+$cursor.x,$candidates[$cursor.y+','+$cursor.x]);
+      //});
+      //删除候选值
+    //   candidates.clear(pos);
+    //   //双击清空推断
+    //   currentValueStore.set("");
+    // }
+
+    //
+
+    /*
+    let func = ()=>{
+      aaa.unsubscribe(func);
+    };
+    aaa.subscribe(func);
+
+    */
+
     userGrid.subscribe(($userGrid) => {
+      console.log("xhr_1")
+      console.log($num);
+      if ($num === -1){
+        return
+      }
       if (
         $userGrid[$cursor.y][$cursor.x] === 0 &&
         candidates1 &&
         candidates1.length === 1
       ) {
         console.log("双击事件触发");
+        console.log("111");
         userGrid.set($cursor, candidates1[0]); // 更新 grid
         let pos = { x: $cursor.x, y: $cursor.y };
         console.log($userGrid[$cursor.y][$cursor.x]);
         userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
+          console.log("xhr_2")
+          console.log($num);
+          if ($num === -1){
+            return
+          }
           if ($candidateonlySet.has(`${$cursor.y},${$cursor.x}`)) {
             $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
             //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
