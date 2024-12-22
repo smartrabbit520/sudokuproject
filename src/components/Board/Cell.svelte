@@ -220,8 +220,7 @@
     >
       <button
         class="cell-btn"
-        on:click={handleSingleClick}
-        on:dblclick={handleDoubleClick}
+        on:click={handleClick}
         class:showhighlight={candidates1 && candidates1.length === 1}
       >
         {#if candidates1 && candidates1.length > 1 && hintsLevel >= $num && $num >= candidates1.length}
