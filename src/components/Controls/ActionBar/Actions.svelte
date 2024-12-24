@@ -32,6 +32,8 @@
 	function handleHint() {
 		let num1=$num;
 		if(num1<$settings.hintsLevel){
+			//清空candidateOnlySet
+			userGrid.candidateonlySet.set(new Set());
 			userGrid.applyHint($cursor);
 			num.set(num1+1);
 		}
@@ -41,6 +43,8 @@
 
 	}
 	function handleDoubleClick() {
+		//清空candidateOnlySet
+		userGrid.candidateonlySet.set(new Set());
 		for (let cell = 0; cell < GRID_LENGTH; cell++) {
 			const [row, col] = GRID_COORDS[cell];
 			let pos={x:row,y:col};

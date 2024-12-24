@@ -14,5 +14,5 @@ export default {
 	prompt,
 	welcome,
 	gameover,
-	nosolution
+	nosolution,
 }
