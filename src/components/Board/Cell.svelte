@@ -21,33 +21,26 @@
   export let sameArea;
   export let sameNumber;
 
-  
-
   const borderRight = cellX !== SUDOKU_SIZE && cellX % 3 !== 0;
   const borderRightBold = cellX !== SUDOKU_SIZE && cellX % 3 === 0;
   const borderBottom = cellY !== SUDOKU_SIZE && cellY % 3 !== 0;
   const borderBottomBold = cellY !== SUDOKU_SIZE && cellY % 3 === 0;
 
-
   let lastClickTime = 0;
   let timeoutId = null;
 
   $: if (conflictingNumber) {
-    modal.show("nosolution",
-    {
+    modal.show("nosolution", {
       //传递必要的数据给 NoSolution 组件
 
       data: {
-          callback: () => {
-            // 点击继续后的回调函数
-            conflictingNumber = false; // 重置冲突状态
-            console.log("errrr", conflictingNumber);
-          },
-
+        callback: () => {
+          // 点击继续后的回调函数
+          conflictingNumber = false; // 重置冲突状态
+          console.log("error", conflictingNumber);
+        },
       },
-    }
-    );
-
+    });
   }
 
   // 统一的点击事件处理
@@ -71,31 +64,28 @@
   }
 
   function handleSingleClick(event) {
-    
     console.log("单击事件触发");
     // 处理单击事件逻辑
     cursor.set(cellX - 1, cellY - 1);
     console.log($cursor.y);
     let isUpdating = false; // 标志位，避免重复更新
     Gridsource.subscribe(($Gridsource) => {
-      if(isUpdating)return;
+      if (isUpdating) return;
       if ($cursor.y !== null) {
         const currentValue = $Gridsource[$cursor.y][$cursor.x];
         console.log("Current Value in Child:", currentValue);
         currentValueStore.set(currentValue); // 更新 store 中的值
       }
-      isUpdating=true;
+      isUpdating = true;
     });
   }
-
-
 
   function handleDoubleClick(event) {
     cursor.set(cellX - 1, cellY - 1);
     event.stopPropagation(); // 阻止事件冒泡，防止父级事件处理
 
     let isUpdating = false;
-    
+
     // if (
     //   $userGrid[$cursor.y][$cursor.x] === 0 &&
     //   candidates1 &&
@@ -133,27 +123,22 @@
     //       console.error("userGrid.candidateonlySet is not a Set type as expected!");
     //   }
 
+    // userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
+    //   if ($candidateonlySet.has(`${$cursor.y},${$cursor.x}`)) {
+    //     $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
+    //     //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
+    //   }
+    //   if ($candidateonlySet.size===0){
+    //     console.log("22222222222222222");
+    //     userGrid.applyHint($cursor);
+    //   }
+    // });
 
-
-
-
-
-      // userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
-      //   if ($candidateonlySet.has(`${$cursor.y},${$cursor.x}`)) {
-      //     $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
-      //     //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
-      //   }
-      //   if ($candidateonlySet.size===0){
-      //     console.log("22222222222222222");
-      //     userGrid.applyHint($cursor);
-      //   }
-      // });
-
-      //candidates.subscribe($candidates=> {
-      //console.log($cursor.x+','+$cursor.y,$candidates[$cursor.x+','+$cursor.y]);
-      // console.log($cursor.y+','+$cursor.x,$candidates[$cursor.y+','+$cursor.x]);
-      //});
-      //删除候选值
+    //candidates.subscribe($candidates=> {
+    //console.log($cursor.x+','+$cursor.y,$candidates[$cursor.x+','+$cursor.y]);
+    // console.log($cursor.y+','+$cursor.x,$candidates[$cursor.y+','+$cursor.x]);
+    //});
+    //删除候选值
     //   candidates.clear(pos);
     //   //双击清空推断
     //   currentValueStore.set("");
@@ -172,9 +157,9 @@
     userGrid.subscribe(($userGrid) => {
       // console.log("xhr_1")
       // console.log($num);
-      if(isUpdating)return;
-      if ($num === -1){
-        return
+      if (isUpdating) return;
+      if ($num === -1) {
+        return;
       }
       if (
         $userGrid[$cursor.y][$cursor.x] === 0 &&
@@ -185,23 +170,23 @@
         // console.log("111");
 
         userGrid.set($cursor, candidates1[0]); // 更新 grid
-        isUpdating=true;
+        isUpdating = true;
         let pos = { x: $cursor.x, y: $cursor.y };
         // console.log($userGrid[$cursor.y][$cursor.x]);
-        let isHinting = false;  // 防止重复调用提示逻辑
+        let isHinting = false; // 防止重复调用提示逻辑
 
         userGrid.candidateonlySet.subscribe(($candidateonlySet) => {
           // console.log("xhr_2")
           // console.log($num);
-          if(isHinting)return;
-          if ($num === -1){
-            return
+          if (isHinting) return;
+          if ($num === -1) {
+            return;
           }
           if ($candidateonlySet.has(`${$cursor.y},${$cursor.x}`)) {
             $candidateonlySet.delete(`${$cursor.y},${$cursor.x}`);
             //console.log( `${$cursor.y},${$cursor.x}`,"已删除");
           }
-          if ($candidateonlySet.size===0 && $num > 0){
+          if ($candidateonlySet.size === 0 && $num > 0) {
             // console.log($candidateonlySet.size,$num);
             userGrid.applyHint($cursor);
           }
