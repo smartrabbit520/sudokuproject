@@ -34,6 +34,7 @@
 			button: 'Continue',
 			onHide: game.resume,
 			callback: () => {
+				// console.log("22")
 				//game.startCreatorMode();
 			},
 		});

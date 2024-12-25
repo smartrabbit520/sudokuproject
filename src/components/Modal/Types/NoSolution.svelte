@@ -1,10 +1,25 @@
 <script>
-    export let data = {};
+    export let data ;
     export let hideModal;
-
+    import { invalidCells } from '@sudoku/stores/grid';
+    import { cursor } from "@sudoku/stores/cursor";
     function handleContinue() {
-        if (data.callback) data.callback();
+        //console.log("data.callback:", data, typeof data.callback); // 调试输出
+        // console.log("wudi",data.callback1);
+        if(data.callback)data.callback();
+        // invalidCells.subscribe(($invalidCells) => {
+        //     // 找到元素的索引
+        //    // console.log("changdu",$invalidCells.length,$invalidCells[0],$invalidCells[1]) ;
+        //     let index = $invalidCells.indexOf($cursor.x + ',' +$cursor.y);
+        //     console.log(index);
+        //     if (index !== -1) {
+        //         $invalidCells.splice(index, 1);  // 从索引位置删除 1 个元素
+        //     }
+        //     // console.log("changdu",$invalidCells.length,$invalidCells[0],$invalidCells[1]) ;
+        // });
+
         hideModal();
+
     }
 </script>
 
